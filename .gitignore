@@ -64,3 +64,5 @@ typings/
 *.db
 
 package-lock.json
+
+manager.js

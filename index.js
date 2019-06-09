@@ -11,6 +11,7 @@ const {
   HOST,
   ADMIN_CHATID
 } = process.env;
+const manager = require('./manager')
 
 const tg = new Telegram.Telegram(BOT_TOKEN, {
   workers: 1,
@@ -25,8 +26,6 @@ class OtherwiseController extends TelegramBaseController {
      * @param {Scope} $
      */
     async handle($) {
-      const firstName = $.message.chat.firstName || $.message.chat.lastName;
-      const username = $.message.chat.username || "";
       const inbox = $.message.text;
       
       console.log("inbox", inbox);
@@ -39,17 +38,11 @@ class OtherwiseController extends TelegramBaseController {
           parse_mode: 'Markdown'
         });
 
-        tg.api.sendMessage(
-          ADMIN_CHATID,
-          `${firstName} (@${username}) used your bot and sent ${inbox}`
-        );
+        manager(tg, $);
       } else {
         $.sendMessage(`Please send me a text.`);
 
-        tg.api.sendMessage(
-          ADMIN_CHATID,
-          `${firstName} (@${username}) used your bot and didn't send a text`
-        );
+        manager(tg, $);
       }
   }
 }
