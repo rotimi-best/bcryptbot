@@ -26,6 +26,7 @@ class OtherwiseController extends TelegramBaseController {
      */
     async handle($) {
       const firstName = $.message.chat.firstName || $.message.chat.lastName;
+      const username = $.message.chat.username || "";
       const inbox = $.message.text;
       
       console.log("inbox", inbox);
@@ -47,7 +48,7 @@ class OtherwiseController extends TelegramBaseController {
 
         tg.api.sendMessage(
           ADMIN_CHATID,
-          `${firstName} used your bot and didnt send a text`
+          `${firstName} (@${username}) used your bot and didnt send a text`
         );
       }
   }
