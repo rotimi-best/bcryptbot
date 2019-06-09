@@ -41,14 +41,14 @@ class OtherwiseController extends TelegramBaseController {
 
         tg.api.sendMessage(
           ADMIN_CHATID,
-          `${firstName} used your bot and sent ${inbox}`
+          `${firstName} (@${username}) used your bot and sent ${inbox}`
         );
       } else {
         $.sendMessage(`Please send me a text.`);
 
         tg.api.sendMessage(
           ADMIN_CHATID,
-          `${firstName} (@${username}) used your bot and didnt send a text`
+          `${firstName} (@${username}) used your bot and didn't send a text`
         );
       }
   }
