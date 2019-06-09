@@ -7,11 +7,17 @@ const Telegram = require('telegram-node-bot');
 const TelegramBaseController = Telegram.TelegramBaseController;
 const {
   BOT_TOKEN,
+  PORT,
+  HOST,
   ADMIN_CHATID
 } = process.env;
 
 const tg = new Telegram.Telegram(BOT_TOKEN, {
-  workers: 1
+  workers: 1,
+  webAdmin: {
+    port: PORT,
+    host: HOST
+  }
 });
 
 class OtherwiseController extends TelegramBaseController {
